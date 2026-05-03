@@ -1,8 +1,12 @@
-FROM python:3.10-slim
+# Base image (OS)
+FROM python:3.14-slim
+# Working directory
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt --no-cache-dir
+# Copy src code to container
 COPY . .
-ENV FLASK_ENV=production
+# Run the build commands
+RUN pip install -r requirements.txt
+# expose port 3002
 EXPOSE 3002
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:3002", "app:app"]
+# serve the app / run the app (keep it running)
+CMD ["python","app.py"]

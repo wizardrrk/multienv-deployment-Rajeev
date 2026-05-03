@@ -1,23 +1,43 @@
-version: "3.8"
+version: "3.9"
+
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-app
     ports:
       - "3000:3000"
     depends_on:
       - backend-dev
       - backend-prod
+    networks:
+      - multi-env-network
 
   backend-dev:
-    build: ./backend/dev
+    build:
+      context: ./backend/dev
+      dockerfile: Dockerfile
+    container_name: backend-dev-app
     ports:
       - "3001:3001"
     env_file:
       - ./backend/dev/.env
+    networks:
+      - multi-env-network
 
   backend-prod:
-    build: ./backend/prod
+    build:
+      context: ./backend/prod
+      dockerfile: Dockerfile
+    container_name: backend-prod-app
     ports:
       - "3002:3002"
     env_file:
       - ./backend/prod/.env
+    networks:
+      - multi-env-network
+
+networks:
+  multi-env-network:
+    driver: bridge

@@ -1,11 +1,20 @@
-FROM node:18-alpine as build
-WORKDIR /app
-COPY package.json .
-RUN npm install
-COPY . .
-RUN npm run build
+# Use lightweight Node image
+FROM node:18-alpine
 
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+# Set working directory
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy remaining project files
+COPY . .
+
+# Expose React default port
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+
+# Start React app
+CMD ["npm", "start"]

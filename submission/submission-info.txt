@@ -1,0 +1,15 @@
+Student Name: RAJEEV RANJAN KUMAR
+
+Repository URL: https://github.com/wizardrrk/multienv-deployment-Rajeev
+
+Deployment Status: Issues
+
+Access URLs:
+
+- Development: http://[IP]:3000/dev
+
+- Production: http://[IP]:3000/prod
+
+- Frontend: http://[IP]:3000
+
+Date of Submission: 03052026
